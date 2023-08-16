@@ -1,7 +1,7 @@
 import Header from "./components/Header";
-import Body from "./components/Body";
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import { Outlet } from "react-router-dom";
 
 /**
  * Header
@@ -21,7 +21,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Header />
-        <Body />
+        <Outlet />
       </div>
     </Provider>
   );

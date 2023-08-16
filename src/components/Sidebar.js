@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const isMenuCollapse = useSelector((store) => store.navSlice.isMenuCollapse);
@@ -10,9 +11,12 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="w-40 shadow-lg pt-4 pl-4">
+    <div className="w-48 shadow-lg pt-4 pl-4">
       <ul className="">
-        <li>Home</li>
+        <Link to="/">
+          <li>Home</li>
+        </Link>
+
         <li>Shorts</li>
         <li>Subscriptions</li>
       </ul>

@@ -4,6 +4,7 @@ import Youtube from "../images/youtube";
 import UserIcon from "../images/usericon.png";
 import { toggleMenu } from "../utils/navSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,13 @@ const Header = () => {
           alt="Hamburger Icon"
           onClick={toggleMenuHandler}
         />
-        <div className="w-28 cursor-pointer">
-          <Youtube />
-        </div>
+        <Link to="/">
+          <div className="w-28 cursor-pointer">
+            <Youtube />
+          </div>
+        </Link>
       </div>
+
       {/* Search Bar */}
       <div className="flex col-span-10 h-10">
         <input
