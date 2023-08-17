@@ -2,12 +2,12 @@ import Header from "./components/Header";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
 /**
  * Header
  * Body
  *  -Sidebar
- *    -MenuItems
  *  -MainContainer
  *    -ButtonList
  *    -VideoContainer
@@ -22,6 +22,7 @@ function App() {
       <div className="App">
         <Header />
         <Outlet />
+        <Footer />
       </div>
     </Provider>
   );

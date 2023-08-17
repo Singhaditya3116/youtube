@@ -1,7 +1,7 @@
 import Hamburger from "../images/hamburger.png";
 import Search from "../images/search.png";
 import Youtube from "../images/youtube";
-import UserIcon from "../images/usericon.png";
+import UserIcon from "../images/user-icon.png";
 import { toggleMenu } from "../utils/navSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,13 +18,13 @@ const Header = () => {
       {/* ICON LOGO */}
       <div className="flex col-span-1 items-center">
         <img
-          className="w-8 cursor-pointer mr-5"
+          className="box-content w-6 cursor-pointer p-2 mr-2 rounded-lg hover:bg-gray-200 "
           src={Hamburger}
           alt="Hamburger Icon"
           onClick={toggleMenuHandler}
         />
         <Link to="/">
-          <div className="w-28 cursor-pointer">
+          <div className="w-24 cursor-pointer">
             <Youtube />
           </div>
         </Link>

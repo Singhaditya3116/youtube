@@ -14,17 +14,15 @@ const searchSuggestions = [
 
 const ButtonList = () => {
   return (
-    <div>
-      <ul className="flex">
-        {searchSuggestions.map((item, index) => {
-          return (
-            <li key={index}>
-              <Button name={item} />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="flex">
+      {searchSuggestions.map((item, index) => {
+        return (
+          <li key={index}>
+            <Button name={item} />
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
