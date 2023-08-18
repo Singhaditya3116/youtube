@@ -7,3 +7,6 @@ export const YOUTUBE_VIDEOS_API =
 export const YOUTUBE_VIDEO_BY_ID_API =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=Ks-_Mh1QhMc&key=" +
   YOUTUBE_API_KEY;
+
+export const YOUTUBE_SUGGESTION_API =
+  "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";

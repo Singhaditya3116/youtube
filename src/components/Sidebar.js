@@ -12,7 +12,7 @@ const MenuItems = ({ name, icon }) => {
   return (
     <li className="p-3 my-2 mr-2  hover:bg-gray-200 rounded-lg">
       <div className="flex">
-        <img className="w-7 mr-4" alt="Subscription icon" src={icon} />
+        <img className="w-6 mr-4" alt="Subscription icon" src={icon} />
         <button>{name}</button>
       </div>
     </li>
