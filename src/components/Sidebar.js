@@ -20,7 +20,7 @@ const MenuItems = ({ name, icon }) => {
 };
 
 const Sidebar = () => {
-  const isMenuCollapse = useSelector((store) => store.navSlice.isMenuCollapse);
+  const isMenuCollapse = useSelector((store) => store.nav.isMenuCollapse);
 
   //Early Return pattern
   if (isMenuCollapse) {

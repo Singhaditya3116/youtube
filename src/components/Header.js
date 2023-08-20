@@ -7,11 +7,16 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { YOUTUBE_SUGGESTION_API } from "../utils/config";
+import { appendData } from "../utils/searchSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [searchText, setSearchText] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const dispatch = useDispatch();
+  const searchedData = useSelector((store) => store.search);
 
   useEffect(() => {
     const timer = setTimeout(() => getSearchSuggestion(), 200);
@@ -22,12 +27,20 @@ const Header = () => {
   }, [searchText]);
 
   const getSearchSuggestion = async () => {
-    const data = await fetch(YOUTUBE_SUGGESTION_API + searchText);
-    const json = await data.json();
-    setSearchSuggestions(json[1]);
+    if (searchText === "") {
+      return null;
+    }
+    // If data ia memoized then return memoized data else make an API call.
+    if (searchText in searchedData) {
+      setSearchSuggestions(searchedData[searchText]);
+    } else {
+      const data = await fetch(YOUTUBE_SUGGESTION_API + searchText);
+      const json = await data.json();
+      // console.log(json[0], json[1]);
+      dispatch(appendData({ [searchText]: json[1] }));
+      setSearchSuggestions(json[1]);
+    }
   };
-
-  const dispatch = useDispatch();
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -59,7 +72,7 @@ const Header = () => {
             placeholder="Search"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            onBlur={() => setShowSuggestions(false)}
+            onBlur={() => setShowSuggestions(true)}
             onFocus={() => setShowSuggestions(true)}
           />
           <button className="w-14 border-y-2 border-r-2 border-gray-500 rounded-r-full bg-gray-200">
@@ -75,8 +88,13 @@ const Header = () => {
                   <li
                     className="py-2 px-2 flex border-b rounded-xl hover:bg-gray-200 select-none"
                     key={suggestion}
+                    onClick={() => setSearchText(suggestion)}
                   >
-                    <img className="w-6 p-1 mr-1" src={Search} alt="search" />
+                    <img
+                      className="w-6 h-6 p-1 mr-1"
+                      src={Search}
+                      alt="search"
+                    />
                     <span> {suggestion}</span>
                   </li>
                 );
