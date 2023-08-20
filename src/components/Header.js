@@ -9,14 +9,16 @@ import { useEffect, useState } from "react";
 import { YOUTUBE_SUGGESTION_API } from "../utils/config";
 import { appendData } from "../utils/searchSlice";
 import { useSelector } from "react-redux";
+import { showSuggestions, hideSuggestions } from "../utils/suggestionSlice";
 
 const Header = () => {
   const [searchText, setSearchText] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  // const [showSuggestions, setShowSuggestions] = useState(false);
 
   const dispatch = useDispatch();
   const searchedData = useSelector((store) => store.search);
+  const suggestions = useSelector((store) => store.suggestion.suggestions);
 
   const getSearchSuggestion = async () => {
     if (searchText === "") {
@@ -73,15 +75,21 @@ const Header = () => {
             placeholder="Search"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            onBlur={() => setShowSuggestions(true)}
-            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => dispatch(hideSuggestions())}
+            onFocus={() => dispatch(showSuggestions())}
           />
-          <button className="w-14 border-y-2 border-r-2 border-gray-500 rounded-r-full bg-gray-200">
-            <img className="w-9 m-auto p-2" src={Search} alt="search button" />
-          </button>
+          <Link to={"/results/" + searchText}>
+            <button className="w-14 border-y-2 border-r-2 border-gray-500 rounded-r-full bg-gray-200">
+              <img
+                className="w-9 m-auto p-2"
+                src={Search}
+                alt="search button"
+              />
+            </button>
+          </Link>
         </div>
         {/* Search Suggestions */}
-        {showSuggestions && (
+        {suggestions && searchSuggestions.length > 1 && (
           <div className="absolute bg-white pt-5 rounded-xl w-[36.3%]">
             <ul>
               {searchSuggestions.map((suggestion) => {

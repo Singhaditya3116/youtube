@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Body from "./components/Body";
 import MainContainer from "./components/MainContainer";
 import Watch from "./components/Watch";
+import SearchResults from "./components/SearchResults";
 
 const appRouter = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const appRouter = createBrowserRouter([
           {
             path: "watch",
             element: <Watch />,
+          },
+          {
+            path: "results/:searchQuery",
+            element: <SearchResults />,
           },
         ],
       },
