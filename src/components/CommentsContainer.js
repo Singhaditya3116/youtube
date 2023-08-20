@@ -37,7 +37,7 @@ const commentsData = [
     ],
   },
   {
-    name: "Singh Uday",
+    name: "Mohammad Siraj",
     text: "No one can beat MSD in wicket-keeper role.",
     replies: [
       {
@@ -84,8 +84,8 @@ const Comment = ({ comment }) => {
         </div>
       </div>
       <div className="ml-7  border-gray-500 border-l-2">
-        {replies.map((comment) => (
-          <Comment comment={comment} />
+        {replies.map((comment, index) => (
+          <Comment comment={comment} key={index} />
         ))}
       </div>
     </>
@@ -96,8 +96,8 @@ const CommentsContainer = () => {
   return (
     <div className="m-2">
       <h2 className="font-bold py-2 text-xl">Comments :</h2>
-      {commentsData.map((comment) => (
-        <div className="border-gray-500 border-l-2">
+      {commentsData.map((comment, index) => (
+        <div className="border-gray-500 border-l-2" key={index}>
           <Comment comment={comment} />
         </div>
       ))}

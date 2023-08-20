@@ -18,14 +18,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const searchedData = useSelector((store) => store.search);
 
-  useEffect(() => {
-    const timer = setTimeout(() => getSearchSuggestion(), 200);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [searchText]);
-
   const getSearchSuggestion = async () => {
     if (searchText === "") {
       return null;
@@ -41,6 +33,15 @@ const Header = () => {
       setSearchSuggestions(json[1]);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSearchSuggestion(), 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText]);
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
