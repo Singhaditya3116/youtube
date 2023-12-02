@@ -39,6 +39,7 @@ const SearchResults = () => {
 
   useEffect(() => {
     getVideosData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getVideosData = async () => {

@@ -1,5 +1,7 @@
 const YOUTUBE_API_KEY = "AIzaSyDkuVQDEEV6sP-eT6FyuuJnpV11mvVpJnE";
 
+export const LIVE_CHAT_OFFSET = 30;
+
 export const YOUTUBE_VIDEOS_API =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=15&regionCode=IN&key=" +
   YOUTUBE_API_KEY;
