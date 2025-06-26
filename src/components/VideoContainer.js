@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import VideoCard from "./VideoCard";
 import { YOUTUBE_VIDEOS_API } from "../utils/config";
 import { Link } from "react-router-dom";
@@ -16,12 +16,12 @@ const VideoContainer = () => {
     // console.log(json);
     setVideos(json?.items);
   };
-
+  console.log("Videso :",videos)
   return (
-    <div className="mt-6 flex flex-wrap">
+    <div className="flex gap-4 flex-wrap">
       {videos.map((video) => {
         return (
-          <Link key={video.id} to={"/watch?v=" + video.id}>
+          <Link key={video.id} to={"/watch?v=" + video.id} className="max-w-[calc(33%_-_10px)] w-full">
             <VideoCard video={video} />
           </Link>
         );

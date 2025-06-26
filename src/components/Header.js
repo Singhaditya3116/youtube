@@ -1,15 +1,16 @@
 import Hamburger from "../images/hamburger.png";
 import Search from "../images/search.png";
 import Youtube from "../images/youtube";
-import UserIcon from "../images/user-icon.png";
+// import UserIcon from "../images/user-icon.png";
 import { toggleMenu } from "../utils/navSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { YOUTUBE_SUGGESTION_API } from "../utils/config";
+import { WIKI_SEARCH_SUGGESTION_API } from "../utils/config";
 import { appendData } from "../utils/searchSlice";
 import { useSelector } from "react-redux";
 import { showSuggestions, hideSuggestions } from "../utils/suggestionSlice";
+import UserIcon from "../images/user-icon.svg";
 
 const Header = () => {
 	const [searchText, setSearchText] = useState("");
@@ -28,9 +29,9 @@ const Header = () => {
 		if (searchText in searchedData) {
 			setSearchSuggestions(searchedData[searchText]);
 		} else {
-			const data = await fetch(YOUTUBE_SUGGESTION_API + searchText);
+			const data = await fetch(WIKI_SEARCH_SUGGESTION_API + searchText + '&origin=*');
 			const json = await data.json();
-			// console.log(json[0], json[1]);
+			console.log(json[0], json[1]);
 			dispatch(appendData({ [searchText]: json[1] }));
 			setSearchSuggestions(json[1]);
 		}
@@ -141,20 +142,7 @@ const Header = () => {
 
 					{/* Profile Section */}
 					<div className="self-center">
-						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<g clip-path="url(#clip0_52_34)">
-								<rect width="20" height="20" fill="white" />
-								<path
-									d="M10 0C11.3542 0 12.6449 0.270182 13.8249 0.758463L13.8428 0.766602C15.0586 1.27279 16.154 2.01335 17.0703 2.93131C17.9915 3.85091 18.7337 4.9528 19.2415 6.17838C19.7314 7.35677 20 8.64909 20 10.0016C20 11.3558 19.7298 12.6465 19.2415 13.8265L19.2334 13.8444C18.7256 15.0602 17.9867 16.1556 17.0687 17.0719C16.1491 17.9932 15.0472 18.7354 13.8216 19.2432C12.6432 19.7331 11.3509 20.0016 9.99837 20.0016C8.64583 20.0016 7.35352 19.7314 6.1735 19.2432L6.1556 19.235C4.93978 18.7288 3.8444 17.9883 2.92806 17.0719L2.92969 17.0687C2.00846 16.1475 1.26628 15.0472 0.758464 13.8249C0.270182 12.6449 0 11.3542 0 10C0 8.64583 0.270182 7.35514 0.758464 6.17513L0.766602 6.15723C1.27279 4.94141 2.01335 3.84603 2.92969 2.92969H2.93132C3.85254 2.00846 4.9528 1.26628 6.17676 0.758463C7.35514 0.270182 8.64583 0 10 0ZM2.7653 15.376L2.80436 15.3532C3.76465 14.8177 6.26465 14.6403 7.30306 13.916C7.37956 13.8021 7.46094 13.6361 7.54069 13.4554C7.65951 13.1836 7.76856 12.8857 7.83691 12.6839C7.5472 12.3421 7.29818 11.9564 7.06055 11.5771L6.27441 10.3255C5.98796 9.89583 5.83822 9.50521 5.82845 9.18294C5.82357 9.03157 5.84961 8.89486 5.90658 8.77279C5.96517 8.64583 6.05469 8.54004 6.17676 8.45866C6.23372 8.4196 6.2972 8.38704 6.36719 8.36263C6.3151 7.68392 6.2972 6.82943 6.32975 6.11328C6.34603 5.94401 6.38021 5.77311 6.42578 5.60384C6.6276 4.88607 7.13053 4.30827 7.75391 3.91113C8.09733 3.69141 8.47494 3.52702 8.86719 3.41634C9.11784 3.34473 8.65397 2.5472 8.91276 2.51953C10.1611 2.39095 12.181 3.5319 13.0534 4.47428C13.4896 4.94629 13.7646 5.57292 13.8232 6.40137L13.7744 8.44238C13.9925 8.50911 14.1325 8.64746 14.1878 8.87044C14.2513 9.11947 14.1829 9.46777 13.9714 9.94466C13.9681 9.9528 13.9632 9.96256 13.9583 9.9707L13.0615 11.4469C12.7327 11.9889 12.3975 12.5342 11.9629 12.9622C12.0036 13.0208 12.0443 13.0778 12.0833 13.1348C12.2607 13.3952 12.4398 13.6556 12.6693 13.8883C12.6774 13.8965 12.6839 13.9046 12.6888 13.9128C13.7207 14.6419 16.2321 14.8193 17.1956 15.3564L17.2347 15.3792C18.3529 13.8786 19.0137 12.0182 19.0137 10.0033C19.0137 7.51465 18.0046 5.26042 16.3737 3.63118C14.7461 1.9987 12.4919 0.989583 10.0033 0.989583C7.51465 0.989583 5.26042 1.9987 3.63118 3.62956C1.99707 5.25716 0.987956 7.51139 0.987956 10C0.987956 12.015 1.64876 13.8753 2.7653 15.376Z"
-									fill="black"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_52_34">
-									<rect width="20" height="20" fill="white" />
-								</clipPath>
-							</defs>
-						</svg>
+						<img src={UserIcon} alt=""></img>
 					</div>
 				</div>
 			</div>
