@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 
 const searchSuggestions = [
@@ -14,7 +13,7 @@ const searchSuggestions = [
 
 const ButtonList = () => {
   return (
-    <ul className="flex">
+    <ul className="flex mb-4 overflow-x-auto">
       {searchSuggestions.map((item, index) => {
         return (
           <li key={index}>
